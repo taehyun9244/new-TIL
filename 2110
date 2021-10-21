@@ -275,12 +275,36 @@ AOP가 필요한 상황
 aop를 사용하지 않고 코드로 메소드 호출시간을 측정하는 방법은
 long start = System.currentTimeMillis();
         try {
-            validateDuplicateMember(member); //중복 회원 검증　重複会員検証
-            memberRepository.save(member);
-            return member.getId();
+            validateDuplicateMember(member); //중복 회원 검증重複会員検証       ->
+            memberRepository.save(member);                                    ->    핵심 관심 사항(core concern)
+            return member.getId();                                            ->
+        }finally {
+            long finish = System.currentTimeMillis();                          ->
+            long timeMs = finish - start;                                      ->    공통 관심 사항(cross-cutting concern)
+            System.out.println("join = "+timeMs+"ms");                         ->
+        }
+와 같은 방법을 사용해야 된다(사용 할 수 있다). 위와 같은 시간측정하는 코드는 유지보수가 어렵고, 시간을 측정하는 별도의 공통 로직을 만들기 어렵다.
+위와 같은 코드의 단점을 보완하기 위해 AOP가 나왔다.
+
+AOP방법으로
+@Aspect
+@Component
+public class TimeTraceAop {
+    @Around("execution(*hello.spring.demo...*(..))")
+    public Object execute(ProceedingJoinPoint joinPoint) throws Throwable{
+        long start = System.currentTimeMillis();
+        System.out.println("START:" + joinPoint.toString());
+        try {
+            Object result = joinPoint.proceed();
+            return result;
         }finally {
             long finish = System.currentTimeMillis();
             long timeMs = finish - start;
-            System.out.println("join = "+timeMs+"ms");
+            System.out.println("END:" + joinPoint.toString() + "" + timeMs + "ms");
         }
-와 같은 방법을 사용해야 된다(사용 할 수 있다).
+
+    }
+}으로 공통관심 사항을 분리한 후, 변경이 필요하면 이 로직만 변경하면 되기때문에, 핵심 관심사항을 클린하게 관리할 수 있다.
+AOP는 EnhancerBySpringCGLIB라는 기술을 이용해 클래스를 복제한다. 
+Spring Container가 Proxy의 가짜서비스 내세우고 joinPoint.proceed()가 되면 실제 서비스를 호출하게 되는 과정으로 AOP가 구현된다.
+--------------------------------------------------------------------------------------------------------------
