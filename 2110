@@ -288,7 +288,7 @@ long start = System.currentTimeMillis();
 
 AOP방법으로
 @Aspect
-@Component -> Spring Bean에 등록해도 되고 Component를 사용해도  
+@Component -> Spring Bean에 등록해도 되고 Component를 사용가  
 public class TimeTraceAop {
     @Around("execution(*hello.spring.demo...*(..))")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable{
