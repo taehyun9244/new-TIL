@@ -146,7 +146,7 @@ Client → Web server(静的コンテンツ) → WAS(動的コンテンツ) → 
 
 2. @NonNull같이 필드에 제약조건이 설정되어 있는 경우, 생성자내 null-check로직이 생성되지 않는다.
 
-@RequiredArgsConstructor : 추가 작업을 필요로 하는 필드에 대한 생성장를 생성하는 어노테이션이다.
+@RequiredArgsConstructor : 추가 작업을 필요로 하는 필드에 대한 생성자를 생성하는 어노테이션이다.
 초기화 되지 않은 모든final필드, @NonNull이 적용되어 있는 모든 필드에 자동적으로 생성자를 생성해 준다.
 @NonNull로 마크돼있는 필드들은 null-check가 추가적으로 생성되며, @NonNull이 마크되어 있지만, 파라미터에서 null값이 들어온다면 생성자에서 NullPointerException이 발생한다.
 파라미터의 순서는 클래스에 있는 필드 순서에 맞춰서 생성해야 된다.
@@ -164,13 +164,31 @@ Client → Web server(静的コンテンツ) → WAS(動的コンテンツ) → 
 → 세 애노테이션 모두 접근 제한자를 AccessLevel로 설정할 수 있다.
 기본값은 public이지만 필요로 따라서 접근제한자를 설정해줘야 한다.
 
+
+@NoArgsConstructor : parametersがないconstructorを生産します。
+
+1.フィールドがfinalで生成されている場合には、フィールドを初期化することができないため、constructorを作ることができません。
+@NoArgsConstructor(force = true)で、finalフィールドを0,false,nullなどで初期化させるのができます。
+
+2. @NonNullがフィールドに設定されている場合、constructoでnull-checkのlogicができません。
+
+@RequiredArgsConstructor：追加作業を必要とするフィールドに対するconstructorを生成するアノテーションであります。
+初期化されていない全てのfinalフィールド、@NonNullが適用されている全てのフィールドに自動的にconstructorを生成してくれます。
+@NonNullとマークされているフィールドは、null-checkが追加で生成され、@NonNullがマークされているが、parametersからnull値が入ってくるなら、constructorからNullPointerExceptionが発生する。
+@AllArgsConstructor：クラスに存内する全てのフィールドに対するconstructorを自動で生成してくれます。
+もし、フィールド中に@NonNull アノテーションがマークされているなら、constructorの中でnull-checkロジックを自動的に生成します。
+
+constructorに関するAnnotationを作るとき気を付けなければならないこと
+1.staticフィールドはスキップ。
+2.parametersの順序はクラスにあるフィールド順序に合わせて生成するため極めて注意。
+3.Access Levelを必ず設定。
 --------------------------------------------------------------------------------------------------------------
 
 10/19
 
 생성자(constructor)란 new연산자와 같이 사용되어 클래스로부터 객체를 생성할 때 호출되어 객체의 초기화를 담당한다.
 
-생성자 선언방법은 public 클래스(매개변수){
+생성자 선언방법은 public 클래스(parameters){
            ......
 } 
 
@@ -180,6 +198,15 @@ new 연산자를 사용해 메모리 상에 클래스를 생성(인스턴스)하
 
 ex) 클래스명 레퍼런스변수 = new 클래스명( );
 
+constructorとは、newと一緒に使用され、クラスからオブジェクトを生成するときに呼び出され、オブジェクトの初期化を担当します。
+constructor作る方法は、
+              public class (parameters){
+           ......
+} 
+classの部分はconstructorを定義するclassの名前の同じように付けなければならないです。
+Instanceというのはメモリに生成されたクラスを意味します。
+　
+ex)　クラス名　リファレンス変数 = new クラス名( );
 --------------------------------------------------------------------------------------------------------------
 
 10/20
