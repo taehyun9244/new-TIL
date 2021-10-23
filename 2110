@@ -321,7 +321,7 @@ SOAP란 그 자체로 프로토콜이며 REST보다 보안이나 메시지 전�
 따라서 은행 모바일 앱처럼 보안 수준이 높아야 하거나, 신뢰도가 높아야 되는 앱에서는 SOAP방식이 더 선호됩니다.
 
 REST API란 무엇인가요?
-	REST API란 HTTP URL를 통해 자원을 명시하고, HTTP 메소드(CRUD)를 통해 해당 URL에 대한 CRUD를 적용하는 것을 의미합니다.
-CRUD란 Create생성(POST) Read조회(GET) Update수정(PUT) Delete삭제(DELETE)입니다.
-	이런 REST의 원리를 따르는 것을 REST API라고 합니다.
+REST API란 HTTP URL를 통해 자원을 명시하고, HTTP 메소드(CRUD)를 통해 해당 URL에 대한 CRUD를 적용하는 것을 의미합니다.
+CRUD란 Create생성(POST) Read조회(GET) Update수정(PUT) Delete삭제(DELETE)입니다.	
+이런 REST의 원리를 따르는 것을 REST API라고 합니다.
 --------------------------------------------------------------------------------------------------------------
