@@ -375,5 +375,5 @@ public class Main {                                                             
     iphone.color = "Black";                                                                      Phone galaxy = new Phone("Galaxy10", "Black", 100);
     iphone.price = 200;                                                                          Phone iphone =new Phone("iPhoneX", "Black", 200);
     
-    생성자 생성으로 좀더 간결하고 빠른 코드를 만들 수 가 있다.
+    생성자 생성으로 좀더 간결하고 빠른 코드를 만들 수 가 있다. 파라미터에 아무런 값도 넣어주지 않으면 default값으로 nyte값은 0, boolean값은 false, string값은 null으로 출력된다.
     --------------------------------------------------------------------------------------------------------------
