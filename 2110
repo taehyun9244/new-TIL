@@ -354,3 +354,26 @@ Proxy환경이란 무엇인가요?
         System.out.println(sumOdd);
         System.out.println(sumEven);
 --------------------------------------------------------------------------------------------------------------
+
+10/26
+
+
+class Phone {                                                                                    class Phone {                                                                    
+  String model;                                                                                    String model;
+  String color;                                                                                    String color;
+  int price;                                                                                       int price;
+}
+public class Main {                                                                          Phone(String model, String color, int price) {
+  public static void main(String[] args) {                                      ->               this.model = model;              
+    Phone galaxy = new Phone();                                                                  this.color = color;
+    galaxy.model = "Galaxy10";                                                                   this.color = price;                                                  
+    galaxy.color = "Black";                                                                             }
+    galaxy.price = 100;                                                                               }
+    
+    Phone iphone =new Phone();                                                               public class Main {
+    iphone.model = "iPhoneX";                                                                public static void main(String[] args) {
+    iphone.color = "Black";                                                                      Phone galaxy = new Phone("Galaxy10", "Black", 100);
+    iphone.price = 200;                                                                          Phone iphone =new Phone("iPhoneX", "Black", 200);
+    
+    생성자 생성으로 좀더 간결하고 빠른 코드를 만들 수 가 있다.
+    --------------------------------------------------------------------------------------------------------------
